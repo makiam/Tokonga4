@@ -11,7 +11,9 @@ import java.nio.file.Path;
 
 @Slf4j
 public class App {
+    @Getter
     private static PluginManager pluginManager = new JarPluginManager(Path.of("./Plugins"));
+
     static {
         Runtime.getRuntime().addShutdownHook(new Thread(() -> {
             log.info("Shutdown plugin system...");
@@ -30,6 +32,11 @@ public class App {
 
     public static void main(String... args) {
         log.info("Starting application...");
+
+        try {
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+        } catch (ReflectiveOperationException | UnsupportedLookAndFeelException ex) {
+        }
 
         pluginManager.loadPlugins();
         pluginManager.startPlugins();
