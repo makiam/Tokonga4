@@ -18,14 +18,14 @@ public class App {
             pluginManager.stopPlugins();
             pluginManager.unloadPlugins();
         }));
-        Thread.setDefaultUncaughtExceptionHandler((Thread t, Throwable e) -> {
-            log.error("Uncaught exception: {} from: {}", e.getMessage(), e);
-        });
+        Thread.setDefaultUncaughtExceptionHandler((Thread t, Throwable e) -> log.error("Uncaught exception: {} from: {}", e.getMessage(), e));
     }
 
+    @Getter
     private static GroovyShell shell = new GroovyShell();
 
     @Getter
+    @SuppressWarnings("java:S115")
     private static final String appName = "Tokonga";
 
     public static void main(String... args) {
