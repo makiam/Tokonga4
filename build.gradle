@@ -1,0 +1,37 @@
+plugins {
+    id 'java'
+    id 'application'
+}
+
+group = 'org.artofillusion'
+version = '1.0-SNAPSHOT'
+
+ext {
+    mainClass = "artofillusion.App"
+}
+
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+
+    implementation group: 'org.pf4j', name: 'pf4j', version: "3.13.0"
+    annotationProcessor(group: 'org.pf4j', name: 'pf4j', version: "3.13.0")
+
+    compileOnly libs.lombok
+    annotationProcessor libs.lombok
+    testCompileOnly libs.lombok
+    testAnnotationProcessor libs.lombok
+
+    implementation libs.groovy
+    implementation libs.bundles.logging
+
+    testImplementation platform('org.junit:junit-bom:5.10.0')
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+}
+
+test {
+    useJUnitPlatform()
+}
