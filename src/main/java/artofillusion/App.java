@@ -3,8 +3,12 @@ package artofillusion;
 import groovy.lang.GroovyShell;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
+import org.codehaus.groovy.control.CompilerConfiguration;
+import org.codehaus.groovy.control.customizers.ImportCustomizer;
 import org.pf4j.JarPluginManager;
 import org.pf4j.PluginManager;
+import org.pf4j.PluginStateEvent;
+
 
 import javax.swing.*;
 import java.nio.file.Path;
@@ -13,7 +17,9 @@ import java.nio.file.Path;
 public class App {
     @Getter
     private static PluginManager pluginManager = new JarPluginManager(Path.of("./Plugins"));
-
+    static {
+        pluginManager.addPluginStateListener(App::onPluginStateEvent);
+    }
     static {
         Runtime.getRuntime().addShutdownHook(new Thread(() -> {
             log.info("Shutdown plugin system...");
@@ -24,7 +30,17 @@ public class App {
     }
 
     @Getter
-    private static GroovyShell shell = new GroovyShell();
+    private static GroovyShell shell;
+
+    static {
+        var cc = new CompilerConfiguration();
+        var ic = new ImportCustomizer();
+        ic.addStarImports("javax.swing");
+        ic.addStarImports(App.class.getPackageName());
+        cc.addCompilationCustomizers(ic);
+        shell = new GroovyShell(cc);
+    }
+
 
     @Getter
     @SuppressWarnings("java:S115")
@@ -40,7 +56,12 @@ public class App {
 
         pluginManager.loadPlugins();
         pluginManager.startPlugins();
+        String script = "SwingUtilities.invokeLater(() -> new Layout().setVisible(true));";
+        shell.parse(script).run();
 
-        SwingUtilities.invokeLater(() -> new Layout().setVisible(true));
+    }
+
+    private static void onPluginStateEvent(PluginStateEvent event) {
+        log.info("Plugin {} switched from {} to {}", event.getPlugin(), event.getOldState(), event.getPluginState());
     }
 }
