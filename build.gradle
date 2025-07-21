@@ -27,6 +27,7 @@ dependencies {
 
     implementation libs.groovy
     implementation libs.bundles.logging
+    implementation libs.bundles.docking
 
     testImplementation platform('org.junit:junit-bom:5.10.0')
     testImplementation 'org.junit.jupiter:junit-jupiter'

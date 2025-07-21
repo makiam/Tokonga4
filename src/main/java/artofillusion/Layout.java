@@ -1,12 +1,25 @@
 package artofillusion;
 
+import ModernDocking.app.Docking;
+import ModernDocking.app.RootDockingPanel;
+import ModernDocking.ext.ui.DockingUI;
+
 import artofillusion.api.Tool;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
+import java.util.List;
+import java.util.ArrayList;
 
 public class Layout extends JFrame {
     private JMenu fileMenu;
+    private final List<DockingPanel> windows = new ArrayList<>();
+
+    public Layout() {
+        initDocking();
+    }
+
     @Override
     protected void frameInit() {
         super.frameInit();
@@ -22,5 +35,21 @@ public class Layout extends JFrame {
         App.getPluginManager().getExtensions(Tool.class).forEach(tool -> {
             tools.add(new JMenuItem(tool.getName()));
         });
+    }
+
+    private void initDocking() {
+        Docking.initialize(this);
+        DockingUI.initialize();
+        ModernDocking.settings.Settings.setAlwaysDisplayTabMode(true);
+        ModernDocking.settings.Settings.setTabLayoutPolicy(JTabbedPane.SCROLL_TAB_LAYOUT);
+        // create root panel
+        RootDockingPanel root = new RootDockingPanel(this);
+        add(root, BorderLayout.CENTER);
+    }
+
+    private void addDockingPanel(String persistentID,String tabText,Component component) {
+        DockingPanel panel = new DockingPanel(persistentID,tabText);
+        panel.add(component);
+        windows.add(panel);
     }
 }
