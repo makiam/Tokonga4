@@ -32,9 +32,7 @@ public class Layout extends JFrame {
         fileMenu.add(new JMenuItem("Exit")).addActionListener((ActionEvent e) -> System.exit(0));
         mb.add(new JMenu("Edit"));
         var tools = mb.add(new JMenu("Tools"));
-        App.getPluginManager().getExtensions(Tool.class).forEach(tool -> {
-            tools.add(new JMenuItem(tool.getName()));
-        });
+        App.getPluginManager().getExtensions(Tool.class).stream().map(Tool::create).forEach(mi -> tools.add(mi));
     }
 
     private void initDocking() {

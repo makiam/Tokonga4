@@ -1,4 +1,7 @@
 package artofillusion.model;
 
-public class SceneObject {
+public interface SceneObject {
+    default String getName() {
+        return this.getClass().getSimpleName();
+    }
 }
