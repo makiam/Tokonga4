@@ -6,7 +6,7 @@ public interface SceneObject {
         return this.getClass().getSimpleName();
     }
 
-    default Class editorProvider() {
-        return Class.class;
+    default Class<? extends EditorProvider> editorProvider() {
+        return null;
     }
 }
