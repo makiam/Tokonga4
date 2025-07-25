@@ -9,4 +9,6 @@ public interface SceneObject {
     default Class<? extends EditorProvider> editorProvider() {
         return null;
     }
+
+
 }
