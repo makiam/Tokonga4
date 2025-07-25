@@ -1,4 +1,4 @@
 package artofillusion.model;
 
-public class Texture {
+public class Texture implements SceneObject {
 }

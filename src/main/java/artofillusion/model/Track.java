@@ -1,4 +1,4 @@
 package artofillusion.model;
 
-public class Track extends SceneObject {
+public class Track implements SceneObject {
 }

@@ -1,4 +1,4 @@
 package artofillusion.model;
 
-public class Material {
+public class Material implements SceneObject {
 }
