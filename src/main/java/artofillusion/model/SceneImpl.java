@@ -1,6 +1,7 @@
 package artofillusion.model;
 
 import artofillusion.api.ImplementationVersion;
+import com.thoughtworks.xstream.annotations.XStreamAlias;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.ArrayList;
@@ -8,6 +9,7 @@ import java.util.List;
 
 @Slf4j
 @ImplementationVersion
+@XStreamAlias("scene")
 public class SceneImpl implements Scene {
 
     private final List<Material> materials = new ArrayList<>();
