@@ -19,8 +19,8 @@ public class SceneImpl implements Scene {
     }
 
     @Override
-    public MaterialCollection getMaterialsCollection() {
-        return new MaterialsCollectionImpl();
+    public MaterialsCollection getMaterialsCollection() {
+        return new MaterialsCollection(materials);
     }
 
     @Override
@@ -33,8 +33,17 @@ public class SceneImpl implements Scene {
         textures.add(texture);
     }
 
-    private class MaterialsCollectionImpl extends MaterialCollection {
+    private class MaterialsCollection implements SceneObjectCollection<Material> {
+        private List<Material> materials;
 
+        MaterialsCollection(List<Material> materials) {
+            this.materials = materials;
+        }
+
+        @Override
+        public int getCount() {
+            return materials.size();
+        }
     }
 
     private class TexturesCollectionImpl extends TextureCollection {
