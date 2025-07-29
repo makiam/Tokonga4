@@ -1,5 +1,6 @@
 package zfs;
 
+import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
@@ -11,6 +12,7 @@ import java.nio.file.Path;
 import java.util.HashMap;
 import java.util.Map;
 
+@Slf4j
 public class TestZFS {
 
 
@@ -24,9 +26,10 @@ public class TestZFS {
 
         var zipPath = Path.of("scene.aoiz");
         URI uri = URI.create("jar:" + zipPath.toUri());
-        ;
+
         try (FileSystem zipfs = FileSystems.newFileSystem(uri, env)) {
             Path fileInZip = zipfs.getPath("scene.description");
+            log.info("Path: {}", fileInZip.toUri());
             Files.writeString(fileInZip, "Hello from inside the ZIP!");
         }
 
