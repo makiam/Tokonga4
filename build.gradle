@@ -16,6 +16,7 @@ repositories {
 }
 
 dependencies {
+    implementation("com.google.code.gson:gson:2.13.1")
     implementation group: 'com.thoughtworks.xstream', name: 'xstream', version: '1.4.21'
 
     implementation group: 'org.pf4j', name: 'pf4j', version: "3.13.0"

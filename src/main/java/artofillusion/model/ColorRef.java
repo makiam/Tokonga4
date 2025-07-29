@@ -1,6 +1,6 @@
 package artofillusion.model;
 
-
+import com.google.gson.JsonElement;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 
 @XStreamAlias("color")
