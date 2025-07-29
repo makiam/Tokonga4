@@ -12,8 +12,8 @@ public class SceneJSONTest {
     void testCreate() {
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
         var scene = new SceneJSON();
-        scene.add(java.util.UUID.randomUUID());
-        scene.add(java.util.UUID.randomUUID());
+        scene.add(new SceneItemJSON());
+        scene.add(new SceneItemJSON());
         log.info("Json: {}", gson.toJson(scene));
     }
 }

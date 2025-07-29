@@ -8,9 +8,10 @@ import java.util.UUID;
 public class SceneJSON {
     private final UUID sceneId = java.util.UUID.randomUUID();
 
-    private List<UUID> objects = new ArrayList<>();
+    private List<SceneItemJSON> objects = new ArrayList<>();
 
-    void add(UUID item) {
+    void add(SceneItemJSON item) {
+        item.
         objects.add(item);
     }
 }
