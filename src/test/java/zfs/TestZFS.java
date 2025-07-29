@@ -27,9 +27,10 @@ public class TestZFS {
         var zipPath = Path.of("scene.aoiz");
         URI uri = URI.create("jar:" + zipPath.toUri());
 
-        try (FileSystem zipfs = FileSystems.newFileSystem(uri, env)) {
-            Path fileInZip = zipfs.getPath("scene.description");
-            log.info("Path: {}", fileInZip.toUri());
+        try (FileSystem fs = FileSystems.newFileSystem(uri, env)) {
+            Files.createDirectories(fs.getPath("images"));
+            Path fileInZip = fs.getPath("scene.description");
+            log.info("Path: {}, scheme: {}", fileInZip.toUri(), fileInZip.toUri().getScheme());
             Files.writeString(fileInZip, "Hello from inside the ZIP!");
         }
 
