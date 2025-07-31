@@ -1,5 +1,7 @@
 package model;
 
+import com.google.gson.annotations.SerializedName;
+import com.google.gson.annotations.Expose;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.IOException;
@@ -10,9 +12,15 @@ import java.nio.file.StandardCopyOption;
 
 @Slf4j
 public final class FileMoniker {
+    @Expose(deserialize = false, serialize = false)
     boolean active = true;
+
+
+    @SerializedName("external")
     boolean link = false;
+    @SerializedName("imageOrigin")
     Path source;
+    @SerializedName("path")
     Path local;
 
     public FileMoniker(FileSystem fs, Path source, Boolean link) throws IOException {

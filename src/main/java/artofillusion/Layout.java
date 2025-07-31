@@ -1,5 +1,6 @@
 package artofillusion;
 
+import ModernDocking.DockingRegion;
 import ModernDocking.app.Docking;
 import ModernDocking.app.RootDockingPanel;
 import ModernDocking.ext.ui.DockingUI;
@@ -18,6 +19,8 @@ public class Layout extends JFrame {
 
     public Layout() {
         initDocking();
+        addDockingPanel("976af87b-90f3-42ce-a5d6-e4ab663fbb15", "Script", new JTree());
+        Docking.dock(windows.get(0), this, DockingRegion.SOUTH);
     }
 
     @Override
@@ -45,8 +48,8 @@ public class Layout extends JFrame {
         add(root, BorderLayout.CENTER);
     }
 
-    private void addDockingPanel(String persistentID,String tabText,Component component) {
-        DockingPanel panel = new DockingPanel(persistentID,tabText);
+    private void addDockingPanel(String persistentID, String tabText,Component component) {
+        DockingPanel panel = new DockingPanel(persistentID, tabText);
         panel.add(component);
         windows.add(panel);
     }

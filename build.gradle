@@ -23,6 +23,7 @@ dependencies {
     implementation group: 'org.pf4j', name: 'pf4j', version: "3.13.0"
     annotationProcessor(group: 'org.pf4j', name: 'pf4j', version: "3.13.0")
 
+    implementation libs.rsta
     compileOnly libs.lombok
     annotationProcessor libs.lombok
     testCompileOnly libs.lombok
