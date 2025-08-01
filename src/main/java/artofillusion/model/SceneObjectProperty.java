@@ -1,4 +1,6 @@
 package artofillusion.model;
 
-public class SceneObjectProperty {
+import java.util.function.Supplier;
+
+public abstract class SceneObjectProperty<T> implements SceneObject, Supplier<T> {
 }
